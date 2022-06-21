@@ -603,11 +603,11 @@ function LayoutDesign {
         Start-Process powershell.exe "-NoProfile -ExecutionPolicy Bypass -File `"$PSCommandPath`"" -Verb RunAs
         Exit
     }
-    Import-StartLayout -LayoutPath "F:\Workstation\PC-Build-Script\LayoutModification.xml" -MountPath $env:SystemDrive\
+    Import-StartLayout -LayoutPath "c:\build\PC-Build-Script-master\LayoutModification.xml" -MountPath $env:SystemDrive\
     }
     
 function ApplyDefaultApps {
-    dism /online /Import-DefaultAppAssociations:F:\Workstation\PC-Build-Script\AppAssociations.xml
+    dism /online /Import-DefaultAppAssociations:c:\build\PC-Build-Script-master\AppAssociations.xml
 }
 
 # Custom power profile used for our customers. Ensures systems do not go to sleep.
