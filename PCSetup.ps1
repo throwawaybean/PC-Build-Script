@@ -5,12 +5,13 @@ function SetPCName {
     # This function creates VisualBasic pop-up prompts which ask for this information to be input. You can hange these as needed to suite your MSP
     Add-Type -AssemblyName Microsoft.VisualBasic
     $DeviceType = [Microsoft.VisualBasic.Interaction]::InputBox('Enter Device Type (LT or DT)', 'Device Type')
-    $CompanyName = [Microsoft.VisualBasic.Interaction]::InputBox('Enter Company Initials (Max 4 letters)', 'Company Initials')
+    $CompanyName = "MGBW"
     $AssetID = [Microsoft.VisualBasic.Interaction]::InputBox('Enter a Asset ID', 'Asset ID')
     Write-Output "The asset ID is $AssetID"
-    Write-Output "$DeviceType-$CompanyName-$AssetID"
-    Rename-Computer -NewName "$DeviceType-$CompanyName-$AssetID"
+    Write-Output "$CompanyName-$DeviceType$AssetID"
+    Rename-Computer -NewName "$CompanyName-$DeviceType$AssetID"
 }
+
 
 function InstallChoco {
     # Ask for elevated permissions if required
@@ -602,18 +603,16 @@ function LayoutDesign {
         Start-Process powershell.exe "-NoProfile -ExecutionPolicy Bypass -File `"$PSCommandPath`"" -Verb RunAs
         Exit
     }
-    Import-StartLayout -LayoutPath "c:\build\PC-Build-Script-master\LayoutModification.xml" -MountPath $env:SystemDrive\
+    Import-StartLayout -LayoutPath "F:\Workstation\PC-Build-Script\LayoutModification.xml" -MountPath $env:SystemDrive\
     }
     
 function ApplyDefaultApps {
-    dism /online /Import-DefaultAppAssociations:c:\build\PC-Build-Script-master\AppAssociations.xml
+    dism /online /Import-DefaultAppAssociations:F:\Workstation\PC-Build-Script\AppAssociations.xml
 }
 
 # Custom power profile used for our customers. Ensures systems do not go to sleep.
-function IntechPower {
-    POWERCFG -DUPLICATESCHEME 381b4222-f694-41f0-9685-ff5bb260df2e 381b4222-f694-41f0-9685-ff5bb260aaaa
-    POWERCFG -CHANGENAME 381b4222-f694-41f0-9685-ff5bb260aaaa "Intech Power Management"
-    POWERCFG -SETACTIVE 381b4222-f694-41f0-9685-ff5bb260aaaa
+function Power {
+    POWERCFG -SETACTIVE 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c
     POWERCFG -Change -monitor-timeout-ac 15
     POWERCFG -CHANGE -monitor-timeout-dc 5
     POWERCFG -CHANGE -disk-timeout-ac 30
@@ -635,17 +634,13 @@ function RestartPC{
     Restart-Computer
 }
 
-function Branding{
-Invoke-WebRequest -Uri "https://downloads.pacit.tech/intechlogo.bmp" -OutFile "c:\windows\system32\intechlogo.bmp"
-New-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\OEMInformation" -Name "Manufacturer" -Value "Intech I.T. Solutions Ltd"  -PropertyType "String" -Force
-}
+
 
 InstallChoco
 InstallApps
-#ReclaimWindows10
-#LayoutDesign
-#ApplyDefaultApps
-IntechPower
-Branding
-#SetPCName
+ReclaimWindows10
+LayoutDesign
+ApplyDefaultApps
+Power
+SetPCName
 RestartPC
