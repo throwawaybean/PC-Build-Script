@@ -483,7 +483,7 @@ function ReclaimWindows10 {
     Get-AppxPackage "Microsoft.Getstarted" | Remove-AppxPackage
     Get-AppxPackage "Microsoft.MicrosoftOfficeHub" | Remove-AppxPackage
     Get-AppxPackage "Microsoft.MicrosoftSolitaireCollection" | Remove-AppxPackage
-    # Get-AppxPackage "Microsoft.Office.OneNote" | Remove-AppxPackage
+    Get-AppxPackage "Microsoft.Office.OneNote" | Remove-AppxPackage
     Get-AppxPackage "Microsoft.People" | Remove-AppxPackage
     # Get-AppxPackage "Microsoft.SkypeApp" | Remove-AppxPackage
     Get-AppxPackage "Microsoft.Windows.Photos" | Remove-AppxPackage
