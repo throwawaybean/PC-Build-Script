@@ -635,12 +635,11 @@ function RestartPC{
 }
 
 
-
+SetPCName
 InstallChoco
 InstallApps
 ReclaimWindows10
 LayoutDesign
 ApplyDefaultApps
 Power
-SetPCName
 RestartPC
