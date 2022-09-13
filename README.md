@@ -15,7 +15,8 @@ By default this script will do the following:
 - Install Chocolatey
 - Install Adobe PDF reader
 - Install 7zip
-- Install the new Chromium based Microsoft Edge
+- Install Google Chrome
+- Install Dymo Label Maker
 - Install Microsoft Office 365 Business Retail 64bit (The standard version that works with Microsoft 365 Basic)
 - Apply a custom layout to the task bar and start menu (removes the search bar, app store and Mail icons.
 **- Runs a reclaim windows script. You will want to review these settings and customise them. for the most part the defaults are not offensive, but they are worth reviewing.**
